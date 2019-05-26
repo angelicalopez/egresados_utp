@@ -1,25 +1,25 @@
 @extends('layouts.app')
 
-@section('title', 'Crear administrador')
+@section('title', 'Crear egresado')
 
 @section('content')  
 <div class="wrapper">
-    <div class="profile-background"> 
+    <div class="profile-background-admin"> 
         <div class="filter-black"></div>  
     </div>
-    @include('layouts.nav_root')
+    @include('layouts.nav_admin')
     <div class="profile-content section-nude mb-5">
         <div class="container">
             <div class="row owner mt-3">
                 <div class="text-center mx-auto">
                     <div class="name">
-                        <h4>Super usuario<br/><small>Panel administrativo</small></h4>
+                        <h4>Administrador<br/><small>Panel administrativo</small></h4>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 col-md-offset-3 text-center mx-auto">
-                    <p>Aqui puedes agregar nuevos administradores al sistema</p>
+                    <p>Aqui puedes agregar nuevos egresados al sistema</p>
                     <br/>
                 </div>
             </div>
@@ -27,7 +27,7 @@
             @include('layouts.alerts')
             <div class="row mx-auto">
                 <div class="col-8 mx-auto">
-                    <form class="register-form" method="POST" action="{{ route('admin.store') }}">
+                    <form class="register-form" method="POST" action="{{ route('egresado.store') }}">
                         @csrf
 
                         <label class="orange-color">Nombres</label>                        
@@ -47,7 +47,6 @@
                                     <strong>{{ $errors->first('apellidos') }}</strong>
                             </span>
                             <br>
-                            <br>
                         @endif
 
                         <label class="orange-color mt-2">Correo electronico</label>                        
@@ -56,7 +55,6 @@
                             <span class="help-block">
                                     <strong>{{ $errors->first('email') }}</strong>
                             </span>
-                            <br>
                             <br>
                         @endif
 
@@ -69,20 +67,23 @@
                             <br>
                         @endif
 
-                        <label class="orange-color mt-2">Direccion</label>
-                        <input name="direccion" type="text" class="form-control border" placeholder="direccion">
-                        @if ($errors->has('direccion'))
+                        <label class="orange-color mt-2">Genero</label>
+                        <select name="genero" required class="form-control border">
+                            <option value="M">Masculino</option>
+                            <option value="F">Femenino</option>
+                        </select>
+                        @if ($errors->has('genero'))
                             <span class="help-block">
-                                    <strong>{{ $errors->first('direccion') }}</strong>
+                                <strong>{{ $errors->first('genero') }}</strong>
                             </span>
                             <br>
                         @endif
 
-                        <label class="orange-color mt-2">Telefono</label>
-                        <input name="telefono" min="0" type="number" class="form-control border" placeholder="telefono">
-                        @if ($errors->has('telefono'))
+                        <label class="orange-color mt-2">Edad</label>
+                        <input type="numeric" min="14" name="edad" class="form-control border" placeholder="edad">
+                        @if ($errors->has('edad'))
                             <span class="help-block">
-                                    <strong>{{ $errors->first('telefono') }}</strong>
+                                <strong>{{ $errors->first('edad') }}</strong>
                             </span>
                             <br>
                         @endif
@@ -108,10 +109,10 @@
                             </span>
                             <br>
                         @endif
-
+                        
                         <br>
 
-                        <button class="btn btn-danger btn-block">Crear administrador</button>
+                        <button class="btn btn-danger btn-block">Crear egresado</button>
                     </form>
                 </div>
             </div>

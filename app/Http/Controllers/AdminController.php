@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\AdminRequest;
+use App\Http\Requests\EditAdminRequest;
 
 use App\User;
 use App\Administrador;
@@ -89,9 +90,27 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditAdminRequest $request, $id)
     {
-        //
+        $admin = Administrador::find($id);
+        $user = $admin->user;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if ($request->password != null)
+            $user->password = bcrypt($request->password);
+        $user->estado = $request->estado;
+        $user->save();
+
+        $admin->apellidos = $request->apellidos;
+        $admin->dni = $request->dni;
+        $admin->direccion = $request->direccion;
+        $admin->telefono = $request->telefono;
+        $admin->user_id = $user->id;
+        $admin->pais_id = $request->pais_id;
+        $admin->save();
+
+        $mensaje = "Administrador " . $user->name . " " . $admin->apellidos . " actualizado con exito";
+        return redirect()->route('superuser.admin.edit', $admin->id)->with('success', $mensaje);
     }
 
     /**

@@ -23,4 +23,12 @@ class RootController extends Controller
         $paises = Pais::orderBy('nombre')->get();
         return view('superuser.admin_create')->with('paises', $paises);
     }
+
+    // Retorna vista con datos de admin para editar
+    public function editadmin($id)
+    {
+        $admin = Administrador::find($id);
+        $paises = Pais::orderBy('nombre')->get();
+        return view('superuser.admin_edit')->with('paises', $paises)->with('admin', $admin);
+    }
 }

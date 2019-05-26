@@ -21,9 +21,9 @@ class Egresado extends Model
         return $this->belongsTo('App\Pais');
     }
 
-    public function usuario()
+    public function user()
     {
-        return $this->belongsTo('App\Usuario');
+        return $this->belongsTo('App\User');
     }
 
     public function intereses()

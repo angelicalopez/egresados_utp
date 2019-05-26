@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Rol;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return redirect()->route('superuser.admin');
+        $user = Auth::user();
+        if ($user->rol->id == Rol::where('nombre','Super usuario')->first()->id) {
+            $url = 'superuser.admin';
+        } else if ($user->rol->id == Rol::where('nombre','Administrador')->first()->id) {
+            $url = 'admin.egresados';
+        } else if ($user->rol->id == Rol::where('nombre','Egresado')->first()->id) {
+            $url = 'egresados.index';
+        }
+        return redirect()->route($url);
     }
 }
