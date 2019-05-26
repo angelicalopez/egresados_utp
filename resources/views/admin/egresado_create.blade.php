@@ -32,9 +32,9 @@
 
                         <label class="orange-color">Nombres</label>                        
                         <input name="name" required type="text" class="form-control border" placeholder="nombres">
-                        @if ($errors->has('nombres'))
+                        @if ($errors->has('name'))
                             <span class="help-block">
-                                    <strong>{{ $errors->first('nombres') }}</strong>
+                                    <strong>{{ $errors->first('name') }}</strong>
                             </span>
                             <br>
                             <br>

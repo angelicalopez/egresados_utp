@@ -32,6 +32,9 @@ route::group(['middleware' => 'auth'], function() {
     Route::get('/admin/egresados', 'EgresadoController@index')->name('admin.egresados');
     Route::get('/admin/egresados/create', 'EgresadoController@create')->name('admin.egresado.create');
     Route::get('/admin/egresados/edit/{id}', 'EgresadoController@edit')->name('admin.egresado.edit');
+    Route::get('/admin/noticias', 'NoticiaController@index')->name('admin.noticias');
+    Route::get('/admin/noticias/create', 'NoticiaController@create')->name('admin.noticia.create');
+    Route::post('/admin/noticias/store', 'NoticiaController@store')->name('admin.noticia.store');
 });
 
 route::group(['middleware' => 'auth'], function() {

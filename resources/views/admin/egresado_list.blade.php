@@ -45,8 +45,7 @@
 
             <div class="row mt-5">
                 <div class="text-enter mx-auto">
-                    
-
+                    {{ $egresados->links() }}
                 </div>
 
             </div>

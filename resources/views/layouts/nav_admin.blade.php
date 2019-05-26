@@ -3,7 +3,13 @@
       <a class="nav-link orange-color" href="{{ route('admin.egresados') }}">Egresados</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link orange-color" href="{{ route('admin.egresado.create') }}">Agregar nuevo</a>
+        <a class="nav-link orange-color" href="{{ route('admin.egresado.create') }}">Agregar egresado</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link orange-color" href="{{ route('admin.noticias') }}">Noticias</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link orange-color" href="{{ route('admin.noticia.create') }}">Agregar noticia</a>
     </li>
     <li class="nav-item">
       <a class="nav-link orange-color" href="{{ route('logout') }}"

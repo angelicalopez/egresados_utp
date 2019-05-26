@@ -18,7 +18,7 @@ class EgresadoController extends Controller
      */
     public function index()
     {
-        $egresados = Egresado::all();
+        $egresados = Egresado::paginate(8);
         return view('admin.egresado_list')->with('egresados', $egresados);
     }
 
