@@ -2,6 +2,10 @@
     color: #EB5E28;
 }
 
+.bg-orange {
+    background-color: #EB5E28;
+}
+
 .transparent{
     background-color:rgba(0,0,0,0) !important;  
 } 

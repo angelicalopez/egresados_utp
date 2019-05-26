@@ -4,6 +4,7 @@
 /storage/*.key
 /vendor
 .env
+/public/uploads
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
@@ -33,7 +34,5 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
-
-/public/uploads
 
 # End of https://www.gitignore.io/api/laravel

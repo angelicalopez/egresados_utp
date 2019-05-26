@@ -22,8 +22,8 @@ class NoticiaController extends Controller
     public function index()
     {
         $administrador_id = Auth::user()->administrador->id; 
-        $noticias = Noticia::where('administrador_id', $administrador_id)->get();
-        return view('admin.noticia');
+        $noticias = Noticia::where('administrador_id', $administrador_id)->paginate(8);
+        return view('admin.noticias_list')->with('noticias', $noticias);
     }
 
     /**
@@ -51,29 +51,35 @@ class NoticiaController extends Controller
         $noticia->administrador_id = $administrador_id;
         $noticia->save();
 
-        foreach($request->archivos as $archivo) {
-            $path = $archivo->move('uploads/', $archivo->hashName());
-            ArchivoNoticia::create([
-                'nombre' => $archivo->getClientOriginalName(),
-                'ruta' => $path,
-                'noticia_id' => $noticia->id
-            ]);
+        if ($request->has('archivos')) {
+            foreach($request->archivos as $archivo) {
+                $path = $archivo->move('uploads/', $archivo->hashName());
+                ArchivoNoticia::create([
+                    'nombre' => $archivo->getClientOriginalName(),
+                    'ruta' => $path,
+                    'noticia_id' => $noticia->id
+                ]);
+            }
         }
         
-        foreach($request->imagenes as $imagen) {
-            $path = $imagen->move('uploads/', $imagen->hashName());
-            ImagenNoticia::create([
-                'nombre' => $imagen->getClientOriginalName(),
-                'ruta' => $path,
-                'noticia_id' => $noticia->id
-            ]);
+        if ($request->has('imagenes')) {
+            foreach($request->imagenes as $imagen) {
+                $path = $imagen->move('uploads/', $imagen->hashName());
+                ImagenNoticia::create([
+                    'nombre' => $imagen->getClientOriginalName(),
+                    'ruta' => $path,
+                    'noticia_id' => $noticia->id
+                ]);
+            }
         }
 
         foreach($request->videos as $video) {
-            VideoNoticia::create([
-                'url' => $video,
-                'noticia_id' => $noticia->id
-            ]);
+            if ($video != null) {
+                VideoNoticia::create([
+                    'url' => $video,
+                    'noticia_id' => $noticia->id
+                ]);
+            }
         }
 
         $mensaje = 'Notica ' . $noticia->nombre . ' creada con exito';

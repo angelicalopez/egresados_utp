@@ -47,7 +47,7 @@ class NoticiaRequest extends FormRequest
                     'imagenes' => 'nullable|array',
                     'imagenes.*' => 'image',
                     'videos' => 'nullable|array',
-                    'videos.*' => 'string'
+                    'videos.*' => 'nullable|string'
                 ];
             break;
             case 'PUT':
