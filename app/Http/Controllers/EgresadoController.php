@@ -11,6 +11,7 @@ use App\Http\Requests\EgresadoRequest;
 
 class EgresadoController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -71,7 +72,8 @@ class EgresadoController extends Controller
      */
     public function show($id)
     {
-
+        $user = User::find($id);
+        return view('egresados.profile')->with('user', $user);
     }
 
     /**

@@ -1,9 +1,9 @@
 .orange-color {
-    color: #EB5E28;
+    color: #EB5E28 !important;
 }
 
 .bg-orange {
-    background-color: #EB5E28;
+    background-color: #EB5E28 !important;
 }
 
 .transparent{
@@ -50,4 +50,47 @@
     padding: 30px;
     margin: 0;
     position: absolute;
+}
+
+.navbar-egresado {
+    height: 8vh !important;
+}
+
+.button-hover:hover {
+    background-color: #EB5E28 !important;
+    color:white !important;
+}
+
+.button-hover:hover > * {
+    color:white !important;
+}
+
+
+#profile-section-2 {
+    background-color: #E3E3E3 !important;
+    color: #5C5B5A !important;
+}
+
+#profile-section-3 {
+    background-color: #E3E3E3 !important;
+    color: #5C5B5A !important;
+    min-height: 50vh;
+    max-height: 50vh;
+}
+
+.overflow-y {
+    overflow-y: auto;
+}
+
+#intereses-scroll {
+    max-height: 70%;
+}
+
+.profile-section-3-link {
+    color: #5C5B5A;
+}
+
+.profile-section-3-link:hover {
+    color:white;
+    text-decoration: none !important;
 }

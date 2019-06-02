@@ -39,7 +39,8 @@ class HomeController extends Controller
             if ($user->cambiar_contrasena) {
                 $url = 'changepasswordview';
             } else {
-                $url = 'egresados.index';
+                $url = 'egresado.profile';
+                return redirect()->route($url, $user->id);
             }
         }
         return redirect()->route($url);

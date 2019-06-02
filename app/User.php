@@ -44,7 +44,7 @@ class User extends Authenticatable
 
     public function egresado()
     {
-        return $this->hasOne('App\Rol');
+        return $this->hasOne('App\Egresado');
     }
 
     public function administrador()

@@ -46,5 +46,6 @@ route::group(['middleware' => 'auth'], function() {
 route::group(['middleware' => 'auth'], function() {
     Route::post('/egresado/store', 'EgresadoController@store')->name('egresado.store');
     Route::put('/egresado/update/{id}', 'EgresadoController@update')->name('egresado.update');
+    Route::get('/egresados/profile/{id}', 'EgresadoController@show')->name('egresado.profile');
 });
 
