@@ -110,7 +110,7 @@ class AdminController extends Controller
         $admin->save();
 
         $mensaje = "Administrador " . $user->name . " " . $admin->apellidos . " actualizado con exito";
-        return redirect()->route('superuser.admin.edit', $admin->id)->with('success', $mensaje);
+        return redirect()->route('superuser.admin.edit', $admin->id)->with('info', $mensaje);
     }
 
     /**

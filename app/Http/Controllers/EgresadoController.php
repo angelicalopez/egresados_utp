@@ -114,7 +114,7 @@ class EgresadoController extends Controller
         $egresado->save();
 
         $mensaje = "Egresado " . $user->name . " " . $egresado->apellidos . " editado con exito";
-        return redirect()->route('admin.egresado.edit', $egresado->id)->with('success', $mensaje);
+        return redirect()->route('admin.egresado.edit', $egresado->id)->with('info', $mensaje);
     }
 
     /**

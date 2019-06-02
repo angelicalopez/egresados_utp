@@ -28,6 +28,7 @@ class NoticiaRequest extends FormRequest
             'archivos.*.file' => 'No es un archivo',
             'imagenes.*.image' => 'Se espera un imagen',
             'archivos.*.mimes' => 'Se espera un archivo .pdf o .docx',
+            'videos.*.url' => 'El valor insertado no es una url valida'
         ];
     }
     /**
@@ -47,7 +48,7 @@ class NoticiaRequest extends FormRequest
                     'imagenes' => 'nullable|array',
                     'imagenes.*' => 'image',
                     'videos' => 'nullable|array',
-                    'videos.*' => 'nullable|string'
+                    'videos.*' => 'nullable|url'
                 ];
             break;
             case 'PUT':

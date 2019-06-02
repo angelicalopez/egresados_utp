@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->integer('rol_id')->unsigned();
             $table->string('estado')->default('A');
+            $table->boolean('cambiar_contrasena')->default(true);
             $table->rememberToken();
             $table->timestamps();
 

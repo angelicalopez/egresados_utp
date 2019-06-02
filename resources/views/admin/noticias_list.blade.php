@@ -33,6 +33,13 @@
                             <button class="btn align-self-end align-self-center text-white border" type="button" data-toggle="collapse" data-target="#multiCollapse1_{{ $noticia->id }}" aria-expanded="false" aria-controls="multiCollapse1_{{ $noticia->id }}">Archivos</button>
                             <button class="btn align-self-end align-self-center text-white border" type="button" data-toggle="collapse" data-target="#multiCollapse2_{{ $noticia->id }}" aria-expanded="false" aria-controls="multiCollapse2_{{ $noticia->id }}">Imagenes</button>
                             <button class="btn align-self-end align-self-center text-white border" type="button" data-toggle="collapse" data-target="#multiCollapse3_{{ $noticia->id }}" aria-expanded="false" aria-controls="multiCollapse3_{{ $noticia->id }}">Videos</button>
+                            <a href="{{ route('admin.noticia.edit', $noticia->id) }}" class="btn align-self-end align-self-center text-white border" type="button" >Editar</a>
+                            <button type="button" class="btn align-self-end align-self-center text-white border btn-modal" data-toggle="modal" data-target="#delete_modal" aria-id="{{ $noticia->id }}">Borrar</button>
+                            <form method="POST" action="{{ route('admin.noticia.delete', $noticia->id) }}" id="delete_form_{{ $noticia->id }}">
+                                @csrf
+                                {{ method_field('delete') }}
+                                <input type="hidden" name="noticia_id" value="{{ $noticia->id }}">
+                            </form>
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{ $noticia->nombre }}</h5>
@@ -43,7 +50,7 @@
                                     <div class="card card-body">
                                         <div class="row">
                                             @foreach($noticia->archivos as $archivo)
-                                            <div class="col-4 border m-1 justify-content">
+                                            <div class="col-s4 border m-1 mx-auto">
                                                 <a href="/{{ $archivo->ruta }}">{{ $archivo->nombre }}</a>
                                             </div>
                                             @endforeach
@@ -58,7 +65,7 @@
                                     <div class="card card-body text-center">
                                         <div class="row">
                                             @foreach($noticia->imagenes as $imagen)
-                                            <div class="col-4 m-1 border text-center">
+                                            <div class="col-l4 m-1 border text-center">
                                                 <img src="/{{ $imagen->ruta }}" alt="" class="rounded h-100 w-100">
                                             </div>
                                             @endforeach
@@ -71,7 +78,13 @@
                                 <div class="col">
                                     <div class="collapse multi-collapse" id="multiCollapse3_{{ $noticia->id }}">
                                     <div class="card card-body">
-                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                        <div class="row">
+                                            @foreach($noticia->videos as $video)
+                                            <div class="col-l4 m-1 border text-center mx-auto hv-25">
+                                                <iframe src="https://www.youtube.com/embed/{{$video->url}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                            </div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                     </div>
                                 </div>
@@ -92,3 +105,39 @@
         </div>
     </div> 
 @endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            var noticia_id = 0;
+            $('.btn-modal').on('click', function() {
+                noticia_id = $(this).attr('aria-id');
+            });
+
+            $('#btn-confirm-delete').on('click', function() {
+                $('#delete_form_'+noticia_id).submit();
+            });
+        });
+    </script>
+@endsection
+
+<!-- Modal -->
+<div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModal">Confirmar accion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Al borrar la noticia tambien se borraran los archivos multimedia asociados y no podran ser visto por los usuarios
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="btn-confirm-delete">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>

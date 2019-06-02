@@ -18,6 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/changepassword', 'HomeController@changePasswordView')->name('changepasswordview');
+Route::post('/password', 'HomeController@changePassword')->name('changepassword');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/superuser/admin', 'RootController@administradores')->name('superuser.admin');
@@ -35,6 +37,10 @@ route::group(['middleware' => 'auth'], function() {
     Route::get('/admin/noticias', 'NoticiaController@index')->name('admin.noticias');
     Route::get('/admin/noticias/create', 'NoticiaController@create')->name('admin.noticia.create');
     Route::post('/admin/noticias/store', 'NoticiaController@store')->name('admin.noticia.store');
+    Route::get('/admin/noticia/edit/{id}', 'NoticiaController@edit')->name('admin.noticia.edit');
+    Route::put('/admin/noticia/update/{id}', 'NoticiaController@update')->name('admin.noticia.update');
+    Route::put('/admin/noticia/updatemultimedia/{id}', 'NoticiaController@updatemultimedia')->name('admin.noticia.updatemultimedia');
+    Route::delete('/admin/noticia/delete/{id}', 'NoticiaController@destroy')->name('admin.noticia.delete');
 });
 
 route::group(['middleware' => 'auth'], function() {
