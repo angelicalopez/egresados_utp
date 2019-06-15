@@ -1,6 +1,7 @@
 $(document).ready(function() {
     const form = $('#form-update-intereses');
-    $('.badge-delete').on('click', function() {
+
+    $(document).on('click', '.badge-delete', function() {
         var id = $(this).attr('aria-id');
         
         $('<input>').attr({
@@ -15,17 +16,15 @@ $(document).ready(function() {
         $(this).addClass('badge-danger');
     });
 
-    $('.badge-danger').on('click', function() {
-        console.log('entra');
+    $(document).on('click', '.badge-danger', function() {
         var id = $(this).attr('aria-id');
-        alert(id);
-        //$('#borrar-'+id).remove();
+        $('#borrar-'+id).remove();
         $(this).removeClass('badge-danger');
-        $(this).addClass('badge-success');
         $(this).addClass('badge-delete');
+        $(this).addClass('badge-success');
     });
 
-    $('.badge-add').on('click', function() {
+    $(document).on('click', '.badge-add', function() {
         var id = $(this).attr('aria-id');
         
         $('<input>').attr({
@@ -38,6 +37,14 @@ $(document).ready(function() {
         $(this).removeClass('badge-add');
         $(this).removeClass('badge-secondary');
         $(this).addClass('badge-info');
+    });
+
+    $(document).on('click', '.badge-info', function() {
+        var id = $(this).attr('aria-id');
+        $('#agregar-'+id).remove();
+        $(this).removeClass('badge-info');
+        $(this).addClass('badge-add');
+        $(this).addClass('badge-secondary');
     });
 
     

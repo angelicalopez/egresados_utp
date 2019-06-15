@@ -155,6 +155,20 @@ class EgresadoController extends Controller
     }
 
     public function editIntereses(Request $request, $id) {
-        dd($request->all());
+        $egresado = Egresado::find($id);
+
+        if ($request->has('borrar_intereses')) {
+             foreach($request->borrar_intereses as $interes) {
+                $egresado->intereses()->detach($interes);
+             }
+        }
+
+        if ($request->has('agregar_intereses')) {
+            foreach ($request->agregar_intereses as $interes) { 
+                 $egresado->intereses()->attach($interes);
+            }
+        }
+
+        return redirect()->route('egresado.profile', $egresado->user->id);
     }
 }
