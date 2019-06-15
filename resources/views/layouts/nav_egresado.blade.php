@@ -4,7 +4,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link text-white" href="{{ route('egresado.profile', $user->id) }}">Perfil <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">

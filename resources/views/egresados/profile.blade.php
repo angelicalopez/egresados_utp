@@ -26,7 +26,7 @@
                     </div>
                     @if($can_edit)
                     <h5 class="text-center mt-5">
-                        <a class="p-2 bg-orange text-white rounded-pill" href="#">Actualizar perfil</a>   
+                        <button class="p-2 bg-orange text-white rounded-pill gray-hover">Actualizar perfil</button>   
                     </h5>
                     <h5 class="text-center mt-3">
                         <button id="btn-edit-picture" type="button" class="d-none" data-toggle="modal" data-target="#edit_picture_modal">Actualizar foto</button>
@@ -41,19 +41,17 @@
                 <h4 class="text-center orange-color">INTERESES</h4>
                 <div class="overflow-y p-4" id="">
                     <ul class="list-group">
+                        @foreach($user->egresado->intereses as $interes)
                         <li class="list-group-item d-flex justify-content-between align-items-center button-hover">
-                            <a class="profile-section-3-link w-100" href="#">Cras justo odio</a>
-                            <span class="badge badge-primary badge-pill">14</span>
+                            <a class="profile-section-3-link w-100 orange-color" href="#">{{ $interes->nombre }}</a>
+                            <span class="badge badge-primary badge-pill">{{ $interes->noticias->count() }}</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center button-hover">
-                            <a class="profile-section-3-link w-100" href="#">Cras justo odio</a>
-                            <span class="badge badge-primary badge-pill">2</span>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
                 @if($can_edit)
                 <h5 class="text-center mt-2">
-                    <a class="p-2 orange-color rounded-pill button-hover" href="#">Actualizar intereses</a>   
+                    <button class="p-2 bg-orange text-white rounded-pill gray-hover" data-toggle="modal" data-target="#edit_intereses_modal">Actualizar intereses</button>   
                 </h5>
                 @endif
             </div>
@@ -93,8 +91,55 @@
         </div>
       </div>
     </div>  
+
+    <!-- Modal -->
+    <div class="modal fade" id="edit_intereses_modal" tabindex="-1" role="dialog" aria-labelledby="editInteresesModal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editInteresesModal">Actualizar intereses</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form id="form-update-intereses" method="POST" action="{{ route('egresado.intereses', $user->egresado->id) }}">
+            @csrf
+            {{ method_field('put') }}
+            <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h6>Tus intereses actuales</h6>
+                                <p>Selecciona los que desees borrar</p>
+                                @foreach($intereses_egresado as $interes)
+                                    <a class="badge badge-success badge-delete text-white" aria-id="{{ $interes->id }}">{{ $interes->nombre }}</a>
+                                @endforeach
+                            </div>
+                        </div>
+                        <hr>                    
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h6>Agregar</h6>
+                                <p>Selecciona los que desees agregar</p>
+                                @foreach($intereses as $interes)
+                                    <a class="badge badge-secondary badge-add text-white" aria-id="{{ $interes->id }}">{{ $interes->nombre }}</a>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    
+            </div>
+            <div class="modal-footer p-2">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary" id="btn-confirm-delete">Confirmar</button>
+            </div>
+            </form>
+        </div>
+      </div>
+    </div>  
 @endsection
 
 @section('scripts')
     <script src="{{ asset('js/egresados/editar_imagen.js') }}"></script>
+    <script src="{{ asset('js/egresados/editar_intereses.js') }}"></script>
 @endsection

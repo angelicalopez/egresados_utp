@@ -6,10 +6,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\EgresadoRequest;
 use Illuminate\Http\Request;
-use App\User;
 use App\Egresado;
+use App\Interes;
 use App\Pais;
 use App\Rol;
+use App\User;
 
 class EgresadoController extends Controller
 {
@@ -75,12 +76,16 @@ class EgresadoController extends Controller
     public function show($id)
     {
         $user = User::find($id);
+        $intereses_egresado = $user->egresado->intereses;
+        $filter = $intereses_egresado->pluck('id')->toArray();
+        $intereses = Interes::whereNotIn('id', $filter)->get();
         if ($user->id == Auth::user()->id) {
             $can_edit = true;
         } else {
             $can_edit = false;
         }
-        return view('egresados.profile')->with('user', $user)->with('can_edit', $can_edit);
+        return view('egresados.profile')->with('user', $user)->with('can_edit', $can_edit)
+            ->with('intereses', $intereses)->with('intereses_egresado', $intereses_egresado);
     }
 
     /**
@@ -147,5 +152,9 @@ class EgresadoController extends Controller
         $egresado->imagen = $path;
         $egresado->save();
         return redirect()->route('egresado.profile', $egresado->user->id);
+    }
+
+    public function editIntereses(Request $request, $id) {
+        dd($request->all());
     }
 }

@@ -48,5 +48,6 @@ route::group(['middleware' => 'auth'], function() {
     Route::put('/egresado/update/{id}', 'EgresadoController@update')->name('egresado.update');
     Route::get('/egresados/profile/{id}', 'EgresadoController@show')->name('egresado.profile');
     Route::put('/egresados/updatepicture/{id}', 'EgresadoController@editpicture')->name('egresado.picture');
+    Route::put('/egresados/updateintereses/{id}', 'EgresadoController@editIntereses')->name('egresado.intereses');
 });
 

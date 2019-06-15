@@ -32,6 +32,11 @@
     color: white !important;
 }
 
+.gray-hover:hover {
+    background-color: #DDDDDD !important;
+    color: #EB5E28 !important;
+}
+
 #primer-login-background {
     background-image: url('../paper_img/city.jpg') !important;
     background-position: center center !important;
