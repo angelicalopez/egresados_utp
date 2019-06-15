@@ -35,4 +35,9 @@ class Noticia extends Model
     {
         return $this->hasMany('App\ArchivoNoticia');
     }
+
+    public function intereses()
+    {
+        return $this->belongsToMany('App\Interes', 'intereses_noticias', 'noticia_id', 'interes_id');
+    }
 }

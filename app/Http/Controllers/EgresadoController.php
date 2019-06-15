@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use App\Http\Requests\EgresadoRequest;
 use Illuminate\Http\Request;
 use App\User;
 use App\Egresado;
 use App\Pais;
 use App\Rol;
-use App\Http\Requests\EgresadoRequest;
 
 class EgresadoController extends Controller
 {
@@ -73,7 +75,12 @@ class EgresadoController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('egresados.profile')->with('user', $user);
+        if ($user->id == Auth::user()->id) {
+            $can_edit = true;
+        } else {
+            $can_edit = false;
+        }
+        return view('egresados.profile')->with('user', $user)->with('can_edit', $can_edit);
     }
 
     /**
@@ -128,5 +135,17 @@ class EgresadoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function editpicture(Request $request, $id) {
+        $egresado = Egresado::find($id);
+        if ($egresado->imagen != null) {
+            File::delete($egresado->imagen);
+        }
+        $imagen = $request->file('imagen');
+        $path = $imagen->move('uploads/perfil', $imagen->hashName());
+        $egresado->imagen = $path;
+        $egresado->save();
+        return redirect()->route('egresado.profile', $egresado->user->id);
     }
 }

@@ -9,7 +9,7 @@ class Egresado extends Model
     protected $table = 'egresados';
 
     protected $fillable = [
-        'apellidos', 'dni', 'genero', 'manejo_datos', 'edad', 'user_id', 'pais_id',
+        'apellidos', 'dni', 'genero', 'manejo_datos', 'edad', 'user_id', 'pais_id', 'imagen',
     ];
 
     protected $hidden = [
@@ -28,6 +28,6 @@ class Egresado extends Model
 
     public function intereses()
     {
-        return $this->hasMany('App\Interes');
+        return $this->belongsToMany('App\Interes', 'intereses_egresados', 'egresado_id', 'interes_id');
     }
 }
