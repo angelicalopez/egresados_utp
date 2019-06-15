@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use App\Http\Requests\EgresadoRequest;
 use Illuminate\Http\Request;
-use App\User;
 use App\Egresado;
+use App\Interes;
 use App\Pais;
 use App\Rol;
-use App\Http\Requests\EgresadoRequest;
+use App\User;
 
 class EgresadoController extends Controller
 {
@@ -73,7 +76,16 @@ class EgresadoController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('egresados.profile')->with('user', $user);
+        $intereses_egresado = $user->egresado->intereses;
+        $filter = $intereses_egresado->pluck('id')->toArray();
+        $intereses = Interes::whereNotIn('id', $filter)->get();
+        if ($user->id == Auth::user()->id) {
+            $can_edit = true;
+        } else {
+            $can_edit = false;
+        }
+        return view('egresados.profile')->with('user', $user)->with('can_edit', $can_edit)
+            ->with('intereses', $intereses)->with('intereses_egresado', $intereses_egresado);
     }
 
     /**
@@ -128,5 +140,35 @@ class EgresadoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function editpicture(Request $request, $id) {
+        $egresado = Egresado::find($id);
+        if ($egresado->imagen != null) {
+            File::delete($egresado->imagen);
+        }
+        $imagen = $request->file('imagen');
+        $path = $imagen->move('uploads/perfil', $imagen->hashName());
+        $egresado->imagen = $path;
+        $egresado->save();
+        return redirect()->route('egresado.profile', $egresado->user->id);
+    }
+
+    public function editIntereses(Request $request, $id) {
+        $egresado = Egresado::find($id);
+
+        if ($request->has('borrar_intereses')) {
+             foreach($request->borrar_intereses as $interes) {
+                $egresado->intereses()->detach($interes);
+             }
+        }
+
+        if ($request->has('agregar_intereses')) {
+            foreach ($request->agregar_intereses as $interes) { 
+                 $egresado->intereses()->attach($interes);
+            }
+        }
+
+        return redirect()->route('egresado.profile', $egresado->user->id);
     }
 }

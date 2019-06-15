@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Lista de egresados')
+@section('title', 'Lista de noticias')
 
 @section('content')  
 <div class="wrapper">
@@ -33,7 +33,7 @@
                             <button class="btn align-self-end align-self-center text-white border" type="button" data-toggle="collapse" data-target="#multiCollapse1_{{ $noticia->id }}" aria-expanded="false" aria-controls="multiCollapse1_{{ $noticia->id }}">Archivos</button>
                             <button class="btn align-self-end align-self-center text-white border" type="button" data-toggle="collapse" data-target="#multiCollapse2_{{ $noticia->id }}" aria-expanded="false" aria-controls="multiCollapse2_{{ $noticia->id }}">Imagenes</button>
                             <button class="btn align-self-end align-self-center text-white border" type="button" data-toggle="collapse" data-target="#multiCollapse3_{{ $noticia->id }}" aria-expanded="false" aria-controls="multiCollapse3_{{ $noticia->id }}">Videos</button>
-                            <a href="{{ route('admin.noticia.edit', $noticia->id) }}" class="btn align-self-end align-self-center text-white border" type="button" >Editar</a>
+                            <a href="{{ route('admin.noticia.edit', $noticia->id) }}" class="btn align-self-end align-self-center text-white border">Editar</a>
                             <button type="button" class="btn align-self-end align-self-center text-white border btn-modal" data-toggle="modal" data-target="#delete_modal" aria-id="{{ $noticia->id }}">Borrar</button>
                             <form method="POST" action="{{ route('admin.noticia.delete', $noticia->id) }}" id="delete_form_{{ $noticia->id }}">
                                 @csrf
@@ -44,6 +44,9 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $noticia->nombre }}</h5>
                             <p class="card-text">{{ $noticia->descripcion }}</p>
+                            @foreach($noticia->intereses as $interes)
+                                <span class="badge badge-pill badge-secondary">{{ $interes->nombre }}</span>
+                            @endforeach
                             <div class="row">
                                 <div class="col">
                                     <div class="collapse multi-collapse" id="multiCollapse1_{{ $noticia->id }}">
@@ -66,7 +69,7 @@
                                         <div class="row">
                                             @foreach($noticia->imagenes as $imagen)
                                             <div class="col-l4 m-1 border text-center">
-                                                <img src="/{{ $imagen->ruta }}" alt="" class="rounded h-100 w-100">
+                                                <img src="/{{ $imagen->ruta }}" alt="" class="rounded mh-75 w-75">
                                             </div>
                                             @endforeach
                                         </div>

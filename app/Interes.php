@@ -6,18 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Interes extends Model
 {
-    protected $table = 'intereses';
+    protected $table = 'interes';
 
     protected $fillable = [
-        'nombre', 'egresado_id',
+        'nombre',
     ];
 
     protected $hidden = [
         
     ];
 
-    public function egresado()
+    public function egresados()
     {
-        return $this->belongsTo('App\Egresado');
+        return $this->belongsToMany('App\Egresado', 'intereses_egresados', 'interes_id', 'egresado_id');
+    }
+
+    public function noticias()
+    {
+        return $this->belongsToMany('App\Noticia', 'intereses_noticias', 'interes_id', 'noticia_id');
     }
 }

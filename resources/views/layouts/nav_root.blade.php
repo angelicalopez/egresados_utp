@@ -1,11 +1,11 @@
 <ul class="nav justify-content-center">
-    <li class="nav-item">
+    <li class="nav-item button-hover">
       <a class="nav-link orange-color" href="{{ route('superuser.admin') }}">Administradores</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item button-hover">
         <a class="nav-link orange-color" href="{{ route('superuser.admin.crear') }}">Agregar nuevo</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item button-hover">
       <a class="nav-link orange-color" href="{{ route('logout') }}"
         onclick="event.preventDefault();
                       document.getElementById('logout-form').submit();">

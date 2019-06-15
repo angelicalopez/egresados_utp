@@ -33,7 +33,7 @@
                         {{ method_field('put') }}
 
                         <div class="row">
-                            <div class="col-8">
+                            <div class="col-lg-6 col-md-12 col-sm-12">
                                 <label class="orange-color">Nombre</label>                        
                                 <input name="nombre" required type="text" class="form-control border" placeholder="nombre" value="{{ $noticia->nombre }}">
                                 @if ($errors->has('nombre'))
@@ -53,8 +53,18 @@
                                     <br>
                                 @endif
                             </div>
-                            <div class="col-4 p-2">
-                                <h6 class="text-center">Multimedia ya agregados a la noticia</h6>
+                            <div class="col-lg-3 col-md-12 col-sm-12">
+                                <label class="orange-color mt-2 font-weight-bold">Agregar tags</label>
+                                <br>
+                                <select class="w-100 h-50 orange-color" multiple name="intereses[]" id="">
+                                    @foreach($intereses as $interes)
+                                        <option value="{{ $interes->id }}">{{ $interes->nombre }}</option>
+                                    @endforeach
+                                </select>
+                                <p class="text-justify">Deja presionada la tecla ctrl para seleccionar varios tags</p>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 p-2 ">
+                                <h6 class="text-center orange-color font-weight-bold">Multimedia ya agregados a la noticia</h6>
                                 <p class="justify-content">Marca los que desees borrar</p>
                                 <hr>
                                 <h6 class="small">Archivos</h6>
@@ -91,7 +101,7 @@
                         <hr>
 
                         <div class="row">
-                            <div class="col-4 border p-1" id="archivos">
+                            <div class="col-lg-4 col-md-12 col-sm-12 border p-1" id="archivos">
                                 <p class="text-center font-weight-bold">Agrega archivos a la notica</p>
                                 @if ($errors->has('archivos.*'))
                                     <span class="help-block small">
@@ -103,7 +113,7 @@
                                 
                                 <input name="archivos[]" type="file" class="form-control-file mb-1" accept=".pdf, .docx" id="input-archivo">
                             </div>
-                            <div class="col-4 border p-1" id="imagenes">
+                            <div class="col-lg-4 col-md-12 col-sm-12 border p-1" id="imagenes">
                                 <p class="text-center font-weight-bold">Agrega imagenes a la notica</p>
                                 @if ($errors->has('imagenes.*'))
                                     <span class="help-block small">
@@ -115,7 +125,7 @@
                                 
                                 <input name="imagenes[]" type="file" class="form-control-file mb-1" accept="image/png, image/jpeg" id="input-imagen">
                             </div>
-                            <div class="col-4 border p-1" id="videos">
+                            <div class="col-lg-4 col-md-12 col-sm-12 border p-1" id="videos">
                                 <p class="text-center font-weight-bold">Agrega videos a la noticia</p>
                                 @if ($errors->has('videos.*'))
                                     <span class="help-block small">

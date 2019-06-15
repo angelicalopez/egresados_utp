@@ -31,29 +31,43 @@
                     <form class="register-form" method="POST" action="{{ route('admin.noticia.store') }}" enctype="multipart/form-data">
                         @csrf
 
-                        <label class="orange-color">Nombre</label>                        
-                        <input name="nombre" required type="text" class="form-control border" placeholder="nombre">
-                        @if ($errors->has('nombre'))
-                            <span class="help-block">
-                                    <strong>{{ $errors->first('nombre') }}</strong>
-                            </span>
-                            <br>
-                            <br>
-                        @endif
+                        <div class="row mb-4">
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <label class="orange-color">Nombre</label>                        
+                                <input name="nombre" required type="text" class="form-control border" placeholder="nombre">
+                                @if ($errors->has('nombre'))
+                                    <span class="help-block">
+                                            <strong>{{ $errors->first('nombre') }}</strong>
+                                    </span>
+                                    <br>
+                                    <br>
+                                @endif
 
-                        <label class="orange-color mt-2">Descripcion</label>                        
-                        <textarea name="descripcion" required id="" cols="30" class="form-control border"></textarea>
-                        @if ($errors->has('descripcion'))
-                            <span class="help-block">
-                                    <strong>{{ $errors->first('descripcion') }}</strong>
-                            </span>
-                            <br>
-                        @endif
-                        
+                                <label class="orange-color mt-2">Descripcion</label>                        
+                                <textarea name="descripcion" required id="" cols="30" class="form-control border"></textarea>
+                                @if ($errors->has('descripcion'))
+                                    <span class="help-block">
+                                            <strong>{{ $errors->first('descripcion') }}</strong>
+                                    </span>
+                                    <br>
+                                @endif                           
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 text-center">
+                                <label class="orange-color mt-2 font-weight-bold">Agregar tags</label>
+                                <br>
+                                <select class="w-100 h-75 orange-color" multiple name="intereses[]" id="">
+                                    @foreach($intereses as $interes)
+                                        <option value="{{ $interes->id }}">{{ $interes->nombre }}</option>
+                                    @endforeach
+                                </select>
+                                <p class="text-justify">Deja presionada la tecla ctrl para seleccionar varios tags</p>
+                            </div>
+                        </div>
+
                         <hr>
 
                         <div class="row">
-                            <div class="col-4 border p-1" id="archivos">
+                            <div class="col-lg-4 col-md-12 col-sm-12 border p-1" id="archivos">
                                 <p class="text-center font-weight-bold">Agrega archivos a la notica</p>
                                 @if ($errors->has('archivos.*'))
                                     <span class="help-block small">
@@ -65,7 +79,7 @@
                                 
                                 <input name="archivos[]" type="file" class="form-control-file mb-1" accept=".pdf, .docx" id="input-archivo">
                             </div>
-                            <div class="col-4 border p-1" id="imagenes">
+                            <div class="col-lg-4 col-md-12 col-sm-12 border p-1" id="imagenes">
                                 <p class="text-center font-weight-bold">Agrega imagenes a la notica</p>
                                 @if ($errors->has('imagenes.*'))
                                     <span class="help-block small">
@@ -77,7 +91,7 @@
                                 
                                 <input name="imagenes[]" type="file" class="form-control-file mb-1" accept="image/png, image/jpeg" id="input-imagen">
                             </div>
-                            <div class="col-4 border p-1" id="videos">
+                            <div class="col-lg-4 col-md-12 col-sm-12 border p-1" id="videos">
                                 <p class="text-center font-weight-bold">Agrega videos a la noticia</p>
                                 @if ($errors->has('videos.*'))
                                     <span class="help-block small">
