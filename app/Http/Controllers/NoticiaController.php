@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\NoticiaRequest;
-use App\Noticia;
-use App\ImagenNoticia;
-use App\ArchivoNoticia;
-use App\VideoNoticia;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\NoticiaRequest;
+use App\ImagenNoticia;
+use App\ArchivoNoticia;
+use App\VideoNoticia;
+use App\Noticia;
+use App\Interes;
 
 class NoticiaController extends Controller
 {
@@ -33,7 +34,8 @@ class NoticiaController extends Controller
      */
     public function create()
     {
-        return view('admin.noticia_create');
+        $intereses = Interes::all();
+        return view('admin.noticia_create')->with('intereses', $intereses);
     }
 
     /**
@@ -87,6 +89,12 @@ class NoticiaController extends Controller
             }
         }
 
+        if ($request->has('intereses')) {
+            foreach($request->intereses as $interes) {
+                $noticia->intereses()->attach($interes);
+            }
+        }
+
         $mensaje = 'Notica ' . $noticia->nombre . ' creada con exito';
         return redirect()->route('admin.noticia.create')->with('success', $mensaje);
     }
@@ -111,7 +119,8 @@ class NoticiaController extends Controller
     public function edit($id)
     {
         $noticia = Noticia::find($id);
-        return view('admin.noticia_edit')->with('noticia', $noticia);
+        $interes = Interes::all();
+        return view('admin.noticia_edit')->with('noticia', $noticia)->with('intereses', $interes);
     }
 
     /**
@@ -193,6 +202,14 @@ class NoticiaController extends Controller
             }
         }
 
+        // borra y agrega los nuevos intereses
+        if ($request->has('intereses')) {
+            $noticia->intereses()->detach();
+            foreach($request->intereses as $interes) {
+                $noticia->intereses()->attach($interes);
+            }
+        }
+
         $mensaje = 'La noticia ' . $noticia->nombre . ' ha sido editada con exito';
         return redirect()->route('admin.noticia.edit', $noticia->id)->with('info', $mensaje);
     }
@@ -226,6 +243,9 @@ class NoticiaController extends Controller
         foreach($noticia->videos as $video) {
             $video->delete();
         }
+
+        // borra intereses
+        $noticia->intereses()->detach();
 
         $message = "Noticia " . $noticia->nombre . " borrada con exito";
         $noticia->delete();

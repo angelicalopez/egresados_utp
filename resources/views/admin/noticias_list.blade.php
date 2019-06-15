@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Lista de egresados')
+@section('title', 'Lista de noticias')
 
 @section('content')  
 <div class="wrapper">
@@ -44,6 +44,9 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $noticia->nombre }}</h5>
                             <p class="card-text">{{ $noticia->descripcion }}</p>
+                            @foreach($noticia->intereses as $interes)
+                                <span class="badge badge-pill badge-secondary">{{ $interes->nombre }}</span>
+                            @endforeach
                             <div class="row">
                                 <div class="col">
                                     <div class="collapse multi-collapse" id="multiCollapse1_{{ $noticia->id }}">
