@@ -205,10 +205,15 @@ class EgresadoController extends Controller
     }
 
     // Retorna la lista de noticias con paginacion
-    public function noticias()
+    public function noticias($interes = null)
     {
         $user = Auth::user();
-        $noticias = Noticia::orderBy('created_at', 'desc')->paginate(8);
+        if ($interes == null) {
+            $noticias = Noticia::orderBy('created_at', 'desc')->paginate(3);
+        } else {
+            $interes = Interes::where('nombre', $interes)->first();
+            $noticias = $interes->noticias()->orderBy('created_at', 'desc')->paginate(3);
+        }
         return view('egresados.noticias')->with('user', $user)->with('noticias', $noticias);
     }
 }

@@ -17,6 +17,9 @@
                 <div class="bg-light pt-1 pb-1">
                     <h3 class="orange-color">{{ $noticia->nombre }}</h3>
                     <p class="text-center"> {{ $noticia->descripcion }} </p>
+                    @foreach($noticia->intereses as $interes)
+                        <a href="{{ route('egresado.noticias', $interes->nombre) }}" class="badge badge-info text-white" aria-id="{{ $interes->id }}">{{ $interes->nombre }}</a>
+                    @endforeach
                 </div>
 
                 @if($noticia->archivos->count() > 0)
