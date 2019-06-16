@@ -182,14 +182,12 @@ class EgresadoController extends Controller
 
     public function updateEgresado(EgresadoRequest $request, $id)
     {
-        dd($request->all());
         $egresado = Egresado::find($id);
         $user = $egresado->user;
         $user->name = $request->name;
         $user->email = $request->email;
         if ($request->password != null)
             $user->password = bcrypt($request->password);
-        $user->estado = $request->estado;
         $user->save();
 
         $egresado->apellidos = $request->apellidos;
