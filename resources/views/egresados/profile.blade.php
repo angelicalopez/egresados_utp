@@ -31,6 +31,27 @@
                     <h5 class="text-center mt-3">
                         <a id="btn-edit-picture" type="button" class="d-none" data-toggle="modal" data-target="#edit_picture_modal">Actualizar foto</a>
                     </h5>
+                    @else
+                        @if($add_friend)
+                            <h5 class="text-center mt-5">
+                                <form action="{{ route('egresado.addfriend') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="egresado_id" value="{{ $user->egresado->id }}">
+
+                                    <button type="submit" class="p-2 bg-orange text-white rounded-pill gray-hover">Agregar amigo</button>   
+                                </form>
+                            </h5>
+                        @else 
+                            <h5 class="text-center mt-5">
+                                <form action="{{ route('egresado.deletefriend') }}" method="POST">
+                                    @csrf
+                                    {{ method_field('delete') }}
+                                    <input type="hidden" name="egresado_id" value="{{ $user->egresado->id }}">
+
+                                    <button type="submit" class="p-2 bg-orange text-white rounded-pill gray-hover">Borrar de mis amigos</button>   
+                                </form>
+                            </h5>
+                        @endif
                     @endif
                 </div>
             </div>

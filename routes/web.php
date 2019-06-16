@@ -50,8 +50,10 @@ route::group(['middleware' => 'auth'], function() {
     Route::get('/egresados/profile/edit/{id}', 'EgresadoController@editEgresado')->name('egresado.edit');
     Route::get('/egresados/noticias/{interes?}', 'EgresadoController@noticias')->name('egresado.noticias');
     Route::get('/egresados/amigos/{nombre?}', 'EgresadoController@amigos')->name('egresado.amigos');
+    Route::post('/egresados/addfriend', 'EgresadoController@addfriend')->name('egresado.addfriend');
     Route::put('/egresados/updatepicture/{id}', 'EgresadoController@editpicture')->name('egresado.picture');
     Route::put('/egresados/updateintereses/{id}', 'EgresadoController@editIntereses')->name('egresado.intereses');
     Route::put('/egresados/profile/update/{id}', 'EgresadoController@updateEgresado')->name('egresado.updateegresado');
+    Route::delete('/egresados/deletefriend', 'EgresadoController@deletefriend')->name('egresado.deletefriend');
 });
 

@@ -82,13 +82,21 @@ class EgresadoController extends Controller
         $intereses_egresado = $user->egresado->intereses;
         $filter = $intereses_egresado->pluck('id')->toArray();
         $intereses = Interes::whereNotIn('id', $filter)->get();
+        $add_friend = false;
         if ($user->id == Auth::user()->id) {
             $can_edit = true;
         } else {
             $can_edit = false;
+            // check if the egresado is not already a friend
+            $guest_user = Auth::user();
+            //dd($guest_user->egresado->amigos->pluck('id')->toArray());
+            if (!in_array($user->egresado->id, $guest_user->egresado->amigos->pluck('id')->toArray())) {
+                $add_friend = true;
+            }
         }
         return view('egresados.profile')->with('user', $user)->with('can_edit', $can_edit)
-            ->with('intereses', $intereses)->with('intereses_egresado', $intereses_egresado);
+            ->with('intereses', $intereses)->with('intereses_egresado', $intereses_egresado)
+            ->with('add_friend', $add_friend);
     }
 
     /**
@@ -229,10 +237,30 @@ class EgresadoController extends Controller
             $amigos = $user->egresado->amigos()->paginate(9);
         }
         $amigos_id = $amigos->pluck('id')->toArray();
+        array_push($amigos_id, $user->egresado->id);
         
         $otros = Egresado::whereNotIn('id', $amigos_id)->limit(6)->get();
         
         return view('egresados.amigos')->with('user', $user)->with('amigos', $amigos)
             ->with('otros', $otros);
+    }
+
+    // add a new friend with inverse relationship
+    public function addfriend(Request $request)
+    {
+        $user = Auth::user();
+        $egresado = Egresado::find($request->egresado_id);
+        $user->egresado->amigos()->attach($egresado->id);
+        $egresado->amigos()->attach($user->egresado->id);
+        return redirect()->route('egresado.profile', $egresado->user->id);
+    }
+
+    // delete the relationship with one friend
+    public function deletefriend(Request $request) {
+        $user = Auth::user();
+        $egresado = Egresado::find($request->egresado_id);
+        $user->egresado->amigos()->detach($egresado->id);
+        $egresado->amigos()->detach($user->egresado->id);
+        return redirect()->route('egresado.profile', $egresado->user->id);
     }
 }

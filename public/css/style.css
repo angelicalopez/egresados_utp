@@ -107,3 +107,8 @@
 .edit-picture:hover {
     background-color: #EB5E28;
 }
+
+.orange-hover:hover {
+    background-color: #EB5E28 !important;
+    color: white !important;
+}

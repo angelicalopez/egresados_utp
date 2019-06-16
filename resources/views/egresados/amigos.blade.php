@@ -17,7 +17,7 @@
                 <div class="row">
                     @foreach($amigos as $egresado)
                     <div class="col-lg-4 col-md-6 col-sm-8">
-                        <div class="card">
+                        <div class="card orange-hover">
                             <a href="{{ route('egresado.profile', $egresado->user->id) }}"><img src="/{{ $egresado->imagen }}" class="card-img-top" alt="profile-picture"></a>
                             <div class="card-body">
                                 <h5 class="font-weight-bold">{{ $egresado->user->name }}</h5>
