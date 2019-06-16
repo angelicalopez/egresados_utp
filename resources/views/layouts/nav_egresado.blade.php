@@ -8,7 +8,7 @@
             <a class="nav-link text-white" href="{{ route('egresado.profile', $user->id) }}">Perfil <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-white" href="#">Noticias</a>
+            <a class="nav-link text-white" href="{{ route('egresado.noticias') }}">Noticias</a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-white" href="#" tabindex="-1" aria-disabled="true">Amigos</a>

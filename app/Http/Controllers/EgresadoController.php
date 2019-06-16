@@ -8,6 +8,7 @@ use App\Http\Requests\EgresadoRequest;
 use Illuminate\Http\Request;
 use App\Egresado;
 use App\Interes;
+use App\Noticia;
 use App\Pais;
 use App\Rol;
 use App\User;
@@ -201,5 +202,13 @@ class EgresadoController extends Controller
 
         $mensaje = "Datos actualizados con exito";
         return redirect()->route('egresado.edit', $egresado->id)->with('info', $mensaje);
+    }
+
+    // Retorna la lista de noticias con paginacion
+    public function noticias()
+    {
+        $user = Auth::user();
+        $noticias = Noticia::orderBy('created_at', 'desc')->paginate(8);
+        return view('egresados.noticias')->with('user', $user)->with('noticias', $noticias);
     }
 }
