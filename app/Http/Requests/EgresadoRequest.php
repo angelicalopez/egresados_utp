@@ -49,7 +49,7 @@ class EgresadoRequest extends FormRequest
                 'genero' => Rule::in($this->generos),
                 'pais_id' => 'integer|exists:paises,id',
                 'password' => 'nullable|min:6|max:20',
-                'estado' => 'required',Rule::in($this->estados)
+                'estado' => Rule::in($this->estados)
             ];
             break;
         }

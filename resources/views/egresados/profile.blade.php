@@ -8,9 +8,9 @@
     <div class="navbar-egresado"></div>
     <div class="container vh-100 p-3">
         <div class="row p-20 h-50">
-            <div class="col-12 d-inline-flex flex-row">
+            <div class="col-12 d-flex flex-row align-items-center">
                 <div class="align-self-center h-75 w-50">
-                    <div class="mx-auto p-4 h-75 w-75">
+                    <div class="mx-auto p-4 h-50 w-50">
                         @if($user->egresado->imagen)
                             <img class="img-thumbnail mx-auto @if($can_edit) edit-picture @endif" id="profile-picture" src="/{{ $user->egresado->imagen }}" alt="profile picture">
                         @else
@@ -26,10 +26,10 @@
                     </div>
                     @if($can_edit)
                     <h5 class="text-center mt-5">
-                        <button class="p-2 bg-orange text-white rounded-pill gray-hover">Actualizar perfil</button>   
+                        <a href="{{ route('egresado.edit', $user->egresado->id) }}" class="p-2 bg-orange text-white rounded-pill gray-hover">Actualizar perfil</a>   
                     </h5>
                     <h5 class="text-center mt-3">
-                        <button id="btn-edit-picture" type="button" class="d-none" data-toggle="modal" data-target="#edit_picture_modal">Actualizar foto</button>
+                        <a id="btn-edit-picture" type="button" class="d-none" data-toggle="modal" data-target="#edit_picture_modal">Actualizar foto</a>
                     </h5>
                     @endif
                 </div>
