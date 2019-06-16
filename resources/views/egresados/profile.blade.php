@@ -43,7 +43,7 @@
                     <ul class="list-group">
                         @foreach($user->egresado->intereses as $interes)
                         <li class="list-group-item d-flex justify-content-between align-items-center button-hover">
-                            <a class="profile-section-3-link w-100 orange-color" href="#">{{ $interes->nombre }}</a>
+                            <a class="profile-section-3-link w-100 orange-color" href="{{ route('egresado.noticias', $interes->nombre) }}">{{ $interes->nombre }}</a>
                             <span class="badge badge-primary badge-pill">{{ $interes->noticias->count() }}</span>
                         </li>
                         @endforeach
