@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\EgresadoRequest;
@@ -13,7 +15,6 @@ use App\Noticia;
 use App\Pais;
 use App\Rol;
 use App\User;
-
 class EgresadoController extends Controller
 {
 
@@ -222,8 +223,16 @@ class EgresadoController extends Controller
     public function amigos($nombre = null)
     {
         $user = Auth::user();
-        $amigos = $user->egresado->amigos;
-        $amigos->merge($user->egresado->amigosRelInversa);
-        return view('egresados.amigos')->with('user', $user)->with('amigos', $amigos);
+        if ($nombre) {
+            $amigos = $user->egresado->amigos()->where('nombre', '%like%', $nombre)->paginate(9);
+        } else {
+            $amigos = $user->egresado->amigos()->paginate(9);
+        }
+        $amigos_id = $amigos->pluck('id')->toArray();
+        
+        $otros = Egresado::whereNotIn('id', $amigos_id)->limit(6)->get();
+        
+        return view('egresados.amigos')->with('user', $user)->with('amigos', $amigos)
+            ->with('otros', $otros);
     }
 }
