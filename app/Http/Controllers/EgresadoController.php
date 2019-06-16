@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\EgresadoRequest;
 use Illuminate\Http\Request;
+use App\Amigo;
 use App\Egresado;
 use App\Interes;
 use App\Noticia;
@@ -215,5 +216,14 @@ class EgresadoController extends Controller
             $noticias = $interes->noticias()->orderBy('created_at', 'desc')->paginate(3);
         }
         return view('egresados.noticias')->with('user', $user)->with('noticias', $noticias);
+    }
+
+    // Retorna la lista de amigos del egresado
+    public function amigos($nombre = null)
+    {
+        $user = Auth::user();
+        $amigos = $user->egresado->amigos;
+        $amigos->merge($user->egresado->amigosRelInversa);
+        return view('egresados.amigos')->with('user', $user)->with('amigos', $amigos);
     }
 }
