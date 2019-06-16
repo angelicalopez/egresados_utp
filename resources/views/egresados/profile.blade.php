@@ -10,7 +10,7 @@
         <div class="row p-20 h-50">
             <div class="col-12 d-flex flex-row align-items-center">
                 <div class="align-self-center h-75 w-50">
-                    <div class="mx-auto p-4 h-50 w-50">
+                    <div class="mx-auto p-4 h-75 w-75">
                         @if($user->egresado->imagen)
                             <img class="img-thumbnail mx-auto @if($can_edit) edit-picture @endif" id="profile-picture" src="/{{ $user->egresado->imagen }}" alt="profile picture">
                         @else
@@ -43,7 +43,7 @@
                     <ul class="list-group">
                         @foreach($user->egresado->intereses as $interes)
                         <li class="list-group-item d-flex justify-content-between align-items-center button-hover">
-                            <a class="profile-section-3-link w-100 orange-color" href="#">{{ $interes->nombre }}</a>
+                            <a class="profile-section-3-link w-100 orange-color" href="{{ route('egresado.noticias', $interes->nombre) }}">{{ $interes->nombre }}</a>
                             <span class="badge badge-primary badge-pill">{{ $interes->noticias->count() }}</span>
                         </li>
                         @endforeach
@@ -112,7 +112,7 @@
                                 <h6>Tus intereses actuales</h6>
                                 <p>Selecciona los que desees borrar</p>
                                 @foreach($intereses_egresado as $interes)
-                                    <a class="badge badge-success badge-delete text-white" aria-id="{{ $interes->id }}">{{ $interes->nombre }}</a>
+                                    <a href="#" class="badge badge-success badge-delete text-white" aria-id="{{ $interes->id }}">{{ $interes->nombre }}</a>
                                 @endforeach
                             </div>
                         </div>
@@ -122,7 +122,7 @@
                                 <h6>Agregar</h6>
                                 <p>Selecciona los que desees agregar</p>
                                 @foreach($intereses as $interes)
-                                    <a class="badge badge-secondary badge-add text-white" aria-id="{{ $interes->id }}">{{ $interes->nombre }}</a>
+                                    <a href="#" class="badge badge-secondary badge-add text-white" aria-id="{{ $interes->id }}">{{ $interes->nombre }}</a>
                                 @endforeach
                             </div>
                         </div>
