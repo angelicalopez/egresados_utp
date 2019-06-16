@@ -15,12 +15,12 @@ class CreateAmigosTable extends Migration
     {
         Schema::create('amigos', function (Blueprint $table) {
             $table->increments('id')->unique();
-            $table->integer('user_id')->unsigned();
+            $table->integer('egresado_id')->unsigned();
             $table->integer('amigo_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('amigo_id')->references('id')->on('users');
+            $table->foreign('egresado_id')->references('id')->on('egresados');
+            $table->foreign('amigo_id')->references('id')->on('egresados');
         });
     }
 

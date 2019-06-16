@@ -30,4 +30,14 @@ class Egresado extends Model
     {
         return $this->belongsToMany('App\Interes', 'intereses_egresados', 'egresado_id', 'interes_id');
     }
+
+    public function amigos()
+    {
+        return $this->belongsToMany('App\Egresado', 'amigos', 'egresado_id', 'amigo_id');
+    }
+
+    public function amigosRelInversa()
+    {
+        return $this->belongsToMany('App\Egresado', 'amigos', 'amigo_id', 'egresado_id');
+    }
 }
