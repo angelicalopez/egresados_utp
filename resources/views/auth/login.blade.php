@@ -11,6 +11,12 @@
                         <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 mx-auto">
                             <div class="register-card">
                                 <h3 class="title">Bienvenido!</h3>
+                                @if(session()->has('info'))
+                                <span class="help-block">
+                                    <strong>{{ session()->get('info') }}</strong>
+                                </span>
+                                <hr>
+                                @endif
                                 <form class="register-form" method="POST">
                                     @csrf
                                     <label>Correo electronico</label>

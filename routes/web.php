@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/changepassword', 'HomeController@changePasswordView')->name('changepasswordview');
 Route::post('/password', 'HomeController@changePassword')->name('changepassword');
+Route::post('/login', 'RootController@login')->name('login');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/superuser/admin', 'RootController@administradores')->name('superuser.admin');
