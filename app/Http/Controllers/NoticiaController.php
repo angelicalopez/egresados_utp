@@ -95,7 +95,7 @@ class NoticiaController extends Controller
             }
         }
 
-        $mensaje = 'Notica ' . $noticia->nombre . ' creada con exito';
+        $mensaje = 'Notica ' . $noticia->nombre . ' creada con éxito';
         return redirect()->route('admin.noticia.create')->with('success', $mensaje);
     }
 
@@ -210,7 +210,7 @@ class NoticiaController extends Controller
             }
         }
 
-        $mensaje = 'La noticia ' . $noticia->nombre . ' ha sido editada con exito';
+        $mensaje = 'La noticia ' . $noticia->nombre . ' ha sido editada con éxito';
         return redirect()->route('admin.noticia.edit', $noticia->id)->with('info', $mensaje);
     }
 
@@ -247,7 +247,7 @@ class NoticiaController extends Controller
         // borra intereses
         $noticia->intereses()->detach();
 
-        $message = "Noticia " . $noticia->nombre . " borrada con exito";
+        $message = "Noticia " . $noticia->nombre . " borrada con éxito";
         $noticia->delete();
 
 

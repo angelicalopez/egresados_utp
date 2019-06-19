@@ -35,7 +35,7 @@
                         <br>
                     @endif
 
-                    <label class="orange-color mt-2">Correo electronico</label>                        
+                    <label class="orange-color mt-2">Correo electrónico</label>                        
                     <input name="email" required type="email" class="form-control border" placeholder="email" value="{{ $user->email }}">
                     @if ($errors->has('email'))
                         <span class="help-block">
@@ -53,7 +53,7 @@
                         <br>
                     @endif
 
-                    <label class="orange-color mt-2">Genero</label>
+                    <label class="orange-color mt-2">Género</label>
                     <select name="genero" required class="form-control border">
                         <option value="M" @if($user->egresado->genero == 'M') selected @endif>Masculino</option>
                         <option value="F" @if($user->egresado->genero == 'F') selected @endif>Femenino</option>
@@ -104,7 +104,7 @@
                         <br>
                     @endif
 
-                    <label class="orange-color mt-2">Contrasena</label>                        
+                    <label class="orange-color mt-2">Contraseña</label>                        
                     <input name="password" type="password" class="form-control border" placeholder="contrasena">
                     @if ($errors->has('password'))
                         <span class="help-block">

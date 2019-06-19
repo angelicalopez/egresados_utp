@@ -20,7 +20,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6 col-md-offset-3 text-center mx-auto">
-                    <p>Aqui puedes ver la lista de administradores, de igual manera puedes activarlos o desactivarlos facilmente </p>
+                    <p>Aquí puedes ver la lista de administradores, de igual manera puedes activarlos o desactivarlos fácilmente </p>
                     <br/>
                 </div>
             </div>
@@ -61,7 +61,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="deleteAdminModal">Confirmar accion</h5>
+            <h5 class="modal-title" id="deleteAdminModal">Confirmar acción</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -72,7 +72,7 @@
                     {{ method_field('delete') }}
                     <h6 class="text-center orange-color">Esta seguro que desea borrar el administrador?</h6>                        
                     <input id="delete_admin_input" name="admin_id" type="hidden" value="0">
-                    <p class="text-justify">Esta accion es irreversible, se perderan los datos del administrador, incluyendo sus noticias y no podra volver a ingresar</p>
+                    <p class="text-justify">Esta acción es irreversible, se perderán los datos del administrador, incluyendo sus noticias y no podra volver a ingresar</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

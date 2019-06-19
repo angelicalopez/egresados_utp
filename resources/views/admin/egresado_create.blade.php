@@ -19,7 +19,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6 col-md-offset-3 text-center mx-auto">
-                    <p>Aqui puedes agregar nuevos egresados al sistema</p>
+                    <p>Aquí puedes agregar nuevos egresados al sistema</p>
                     <br/>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                             <br>
                         @endif
 
-                        <label class="orange-color mt-2">Correo electronico</label>                        
+                        <label class="orange-color mt-2">Correo electrónico</label>                        
                         <input name="email" required type="email" class="form-control border" placeholder="email">
                         @if ($errors->has('email'))
                             <span class="help-block">
@@ -67,7 +67,7 @@
                             <br>
                         @endif
 
-                        <label class="orange-color mt-2">Genero</label>
+                        <label class="orange-color mt-2">Género</label>
                         <select name="genero" required class="form-control border">
                             <option value="M">Masculino</option>
                             <option value="F">Femenino</option>
@@ -88,7 +88,7 @@
                             <br>
                         @endif
 
-                        <label class="orange-color mt-2">Pais</label>
+                        <label class="orange-color mt-2">País</label>
                         <select name="pais_id" required class="form-control border">
                             @foreach($paises as $pais)
                                 <option value="{{ $pais->id }}">{{ $pais->nombre }}</option>
@@ -101,7 +101,7 @@
                             <br>
                         @endif
 
-                        <label class="orange-color mt-2">Contrasena</label>                        
+                        <label class="orange-color mt-2">Contraseña</label>                        
                         <input name="password" required type="password" class="form-control border" placeholder="contrasena">
                         @if ($errors->has('password'))
                             <span class="help-block">

@@ -19,7 +19,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6 col-md-offset-3 text-center mx-auto">
-                    <p>Aqui puedes agregar nuevos administradores al sistema</p>
+                    <p>Aquí puedes agregar nuevos administradores al sistema</p>
                     <br/>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                             <br>
                         @endif
 
-                        <label class="orange-color mt-2">Correo electronico</label>                        
+                        <label class="orange-color mt-2">Correo eléctronico</label>                        
                         <input name="email" required type="email" class="form-control border" placeholder="email">
                         @if ($errors->has('email'))
                             <span class="help-block">
@@ -69,7 +69,7 @@
                             <br>
                         @endif
 
-                        <label class="orange-color mt-2">Direccion</label>
+                        <label class="orange-color mt-2">Dirección</label>
                         <input name="direccion" type="text" class="form-control border" placeholder="direccion">
                         @if ($errors->has('direccion'))
                             <span class="help-block">
@@ -78,7 +78,7 @@
                             <br>
                         @endif
 
-                        <label class="orange-color mt-2">Telefono</label>
+                        <label class="orange-color mt-2">Teléfono</label>
                         <input name="telefono" min="0" type="number" class="form-control border" placeholder="telefono">
                         @if ($errors->has('telefono'))
                             <span class="help-block">
@@ -100,7 +100,7 @@
                             <br>
                         @endif
 
-                        <label class="orange-color mt-2">Contrasena</label>                        
+                        <label class="orange-color mt-2">Contraseña</label>                        
                         <input name="password" required type="password" class="form-control border" placeholder="contrasena">
                         @if ($errors->has('password'))
                             <span class="help-block">

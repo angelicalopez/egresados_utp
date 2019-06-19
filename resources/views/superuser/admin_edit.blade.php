@@ -52,7 +52,7 @@
                             <br>
                         @endif
 
-                        <label class="orange-color mt-2">Correo electronico</label>                        
+                        <label class="orange-color mt-2">Correo electrónico</label>                        
                         <input name="email" required type="email" class="form-control border" placeholder="email" value="{{ $admin->user->email }}">
                         @if ($errors->has('email'))
                             <span class="help-block">
@@ -71,7 +71,7 @@
                             <br>
                         @endif
 
-                        <label class="orange-color mt-2">Direccion</label>
+                        <label class="orange-color mt-2">Dirección</label>
                         <input name="direccion" type="text" class="form-control border" placeholder="direccion" value="{{ $admin->direccion }}">
                         @if ($errors->has('direccion'))
                             <span class="help-block">
@@ -106,7 +106,7 @@
                             <br>
                         @endif
 
-                        <label class="orange-color mt-2">Contrasena</label>                        
+                        <label class="orange-color mt-2">Contraseña</label>                        
                         <input name="password" type="password" class="form-control border" placeholder="contrasena">
                         @if ($errors->has('password'))
                             <span class="help-block">

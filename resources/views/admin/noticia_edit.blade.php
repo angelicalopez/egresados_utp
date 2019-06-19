@@ -20,7 +20,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6 col-md-offset-3 text-center mx-auto">
-                    <p>Aqui puedes agregar editar una noticia</p>
+                    <p>Aquí puedes agregar editar una noticia</p>
                     <br/>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                                     <br>
                                 @endif
         
-                                <label class="orange-color mt-2">Descripcion</label>                        
+                                <label class="orange-color mt-2">Descripción</label>                        
                                 <textarea name="descripcion" required id="" cols="30" class="form-control border">{{ $noticia->descripcion }}</textarea>
                                 @if ($errors->has('descripcion'))
                                     <span class="help-block">
@@ -76,7 +76,7 @@
                                         </label>
                                     </div>
                                 @endforeach
-                                <h6 class="small">Imagenes</h6>
+                                <h6 class="small">Imágenes</h6>
                                 @foreach($noticia->imagenes as $imagen)
                                     <div class="form-control">
                                         <input class="form-check-input" type="checkbox" name="imagenes_borrar[]" value="{{ $imagen->id }}" id="imagen_{{ $imagen->id }}">
@@ -114,7 +114,7 @@
                                 <input name="archivos[]" type="file" class="form-control-file mb-1" accept=".pdf, .docx" id="input-archivo">
                             </div>
                             <div class="col-lg-4 col-md-12 col-sm-12 border p-1" id="imagenes">
-                                <p class="text-center font-weight-bold">Agrega imagenes a la notica</p>
+                                <p class="text-center font-weight-bold">Agrega imágenes a la notica</p>
                                 @if ($errors->has('imagenes.*'))
                                     <span class="help-block small">
                                             <strong>{{ $errors->first('imagenes.*') }}</strong>
