@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/changepassword', 'HomeController@changePasswordView')->name('changepasswordview');
 Route::post('/password', 'HomeController@changePassword')->name('changepassword');
+Route::post('/login', 'RootController@login')->name('login');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/superuser/admin', 'RootController@administradores')->name('superuser.admin');
@@ -41,6 +42,7 @@ route::group(['middleware' => 'auth'], function() {
     Route::put('/admin/noticia/update/{id}', 'NoticiaController@update')->name('admin.noticia.update');
     Route::put('/admin/noticia/updatemultimedia/{id}', 'NoticiaController@updatemultimedia')->name('admin.noticia.updatemultimedia');
     Route::delete('/admin/noticia/delete/{id}', 'NoticiaController@destroy')->name('admin.noticia.delete');
+    Route::delete('/admin/delete', 'AdminController@destroy')->name('admin.delete');
 });
 
 route::group(['middleware' => 'auth'], function() {
@@ -55,5 +57,6 @@ route::group(['middleware' => 'auth'], function() {
     Route::put('/egresados/updateintereses/{id}', 'EgresadoController@editIntereses')->name('egresado.intereses');
     Route::put('/egresados/profile/update/{id}', 'EgresadoController@updateEgresado')->name('egresado.updateegresado');
     Route::delete('/egresados/deletefriend', 'EgresadoController@deletefriend')->name('egresado.deletefriend');
+    Route::delete('/egresados/delete', 'EgresadoController@destroy')->name('egresado.delete');
 });
 

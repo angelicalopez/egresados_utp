@@ -9,6 +9,7 @@ use App\Http\Requests\EditAdminRequest;
 use App\User;
 use App\Administrador;
 use App\Rol;
+use Illuminate\Support\Facades\File;
 
 class AdminController extends Controller
 {
@@ -119,8 +120,39 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $admin = Administrador::find($request->admin_id);
+        $user = $admin->user;
+        foreach($admin->noticias as $noticia) {
+            // borra intereses
+            $noticia->intereses()->detach();
+
+            // borra los archivos existentes
+            foreach($noticia->archivos as $archivo) {
+                if (File::delete($archivo->ruta)) {
+                    $archivo->delete();
+                }
+            }
+            
+            // borra imagenes existentes
+            foreach($noticia->imagenes as $imagen) {
+                if (File::delete($imagen->ruta)) {
+                    $imagen->delete();
+                }
+            }
+
+            // borra videos existentes
+            foreach($noticia->videos as $video) {
+                $video->delete();
+            }
+
+            $noticia->delete();
+        }
+        $name = $user->name . ' ' . $admin->apellidos;
+        $admin->delete();
+        $user->delete();
+        $message = "El administrador " . $name . ' fue borrado exitosamente';
+        return redirect()->route('superuser.admin')->with('success', $message);
     }
 }

@@ -5,6 +5,7 @@ use App\User;
 use App\Administrador;
 use App\Pais;
 use App\Http\Requests\AdminRequest;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -30,5 +31,18 @@ class RootController extends Controller
         $admin = Administrador::find($id);
         $paises = Pais::orderBy('nombre')->get();
         return view('superuser.admin_edit')->with('paises', $paises)->with('admin', $admin);
+    }
+
+    // login
+    public function login(Request $request) {
+        $credentials = $request->only('email', 'password');
+        $credentials['estado'] = 'A';
+        if (Auth::attempt($credentials)) {
+            return redirect()->route('home');
+        } else {
+            $message = "Usuario y/o contrasenia invalidos";
+            return redirect()->route('login')->with('info', $message);
+        }
+        
     }
 }

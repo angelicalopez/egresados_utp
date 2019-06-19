@@ -19,8 +19,8 @@ class CreateAmigosTable extends Migration
             $table->integer('amigo_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('egresado_id')->references('id')->on('egresados');
-            $table->foreign('amigo_id')->references('id')->on('egresados');
+            $table->foreign('egresado_id')->references('id')->on('egresados')->onDelete('cascade');
+            $table->foreign('amigo_id')->references('id')->on('egresados')->onDelete('cascade');
         });
     }
 
