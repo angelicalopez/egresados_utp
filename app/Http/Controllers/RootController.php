@@ -40,7 +40,7 @@ class RootController extends Controller
         if (Auth::attempt($credentials)) {
             return redirect()->route('home');
         } else {
-            $message = "Usuario y/o contrasenia invalidos";
+            $message = "Usuario y/o contrasenia invaáidos";
             return redirect()->route('login')->with('info', $message);
         }
         

@@ -58,7 +58,7 @@ class AdminController extends Controller
         $admin->pais_id = $request->pais_id;
         $admin->save();
 
-        $mensaje = "Administrador " . $user->name . " " . $admin->apellidos . " creado con exito";
+        $mensaje = "Administrador " . $user->name . " " . $admin->apellidos . " creado con éxito";
         return redirect()->route('superuser.admin.crear')->with('success', $mensaje);
     }
 

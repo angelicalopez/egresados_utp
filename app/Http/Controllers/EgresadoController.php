@@ -66,7 +66,7 @@ class EgresadoController extends Controller
         $egresado->genero = $request->genero;
         $egresado->save();
 
-        $mensaje = "Egresado " . $user->name . " " . $egresado->apellidos . " creado con exito";
+        $mensaje = "Egresado " . $user->name . " " . $egresado->apellidos . " creado con éxito";
         return redirect()->route('admin.egresado.create')->with('success', $mensaje);
     }
 
@@ -146,7 +146,7 @@ class EgresadoController extends Controller
         $egresado->genero = $request->genero;
         $egresado->save();
 
-        $mensaje = "Egresado " . $user->name . " " . $egresado->apellidos . " editado con exito";
+        $mensaje = "Egresado " . $user->name . " " . $egresado->apellidos . " editado con éxito";
         return redirect()->route('admin.egresado.edit', $egresado->id)->with('info', $mensaje);
     }
 
@@ -169,7 +169,7 @@ class EgresadoController extends Controller
         $egresado->delete();
         $user->delete();
 
-        $message = "El usuario " . $name . ' ha sido borrado con exito';
+        $message = "El usuario " . $name . ' ha sido borrado con éxito';
 
         return redirect()->route('admin.egresados')->with('success', $message);
     }
@@ -223,7 +223,7 @@ class EgresadoController extends Controller
         $egresado->manejo_datos = $request->manejo_datos;
         $egresado->save();
 
-        $mensaje = "Datos actualizados con exito";
+        $mensaje = "Datos actualizados con éxito";
         return redirect()->route('egresado.edit', $egresado->id)->with('info', $mensaje);
     }
 

@@ -19,7 +19,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6 col-md-offset-3 text-center mx-auto">
-                    <p>Aqui puedes ver la lista de noticias creadas por ti</p>
+                    <p>Aquí puedes ver la lista de noticias creadas por ti</p>
                     <br/>
                 </div>
             </div>
@@ -135,7 +135,7 @@
         </button>
       </div>
       <div class="modal-body">
-        Al borrar la noticia tambien se borraran los archivos multimedia asociados y no podran ser visto por los usuarios
+        Al borrar la noticia también se borraran los archivos multimedia asociados y no podrán ser visto por los usuarios
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
