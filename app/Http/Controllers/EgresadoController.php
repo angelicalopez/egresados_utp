@@ -156,9 +156,22 @@ class EgresadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $egresado = Egresado::find($request->egresado_id);
+        // delete the friends
+        $egresado->amigos()->detach();
+        // delete interseses
+        $egresado->intereses()->detach();
+        $user = $egresado->user;
+
+        $name = $user->name . ' ' . $egresado->apellidos;
+        $egresado->delete();
+        $user->delete();
+
+        $message = "El usuario " . $name . ' ha sido borrado con exito';
+
+        return redirect()->route('admin.egresados')->with('success', $message);
     }
 
     public function editpicture(Request $request, $id) {
@@ -251,7 +264,7 @@ class EgresadoController extends Controller
         $user = Auth::user();
         $egresado = Egresado::find($request->egresado_id);
         $user->egresado->amigos()->attach($egresado->id);
-        $egresado->amigos()->attach($user->egresado->id);
+        //$egresado->amigos()->attach($user->egresado->id);
         return redirect()->route('egresado.profile', $egresado->user->id);
     }
 
@@ -260,7 +273,7 @@ class EgresadoController extends Controller
         $user = Auth::user();
         $egresado = Egresado::find($request->egresado_id);
         $user->egresado->amigos()->detach($egresado->id);
-        $egresado->amigos()->detach($user->egresado->id);
+        //$egresado->amigos()->detach($user->egresado->id);
         return redirect()->route('egresado.profile', $egresado->user->id);
     }
 }

@@ -55,5 +55,6 @@ route::group(['middleware' => 'auth'], function() {
     Route::put('/egresados/updateintereses/{id}', 'EgresadoController@editIntereses')->name('egresado.intereses');
     Route::put('/egresados/profile/update/{id}', 'EgresadoController@updateEgresado')->name('egresado.updateegresado');
     Route::delete('/egresados/deletefriend', 'EgresadoController@deletefriend')->name('egresado.deletefriend');
+    Route::delete('/egresados/delete', 'EgresadoController@destroy')->name('egresado.delete');
 });
 
