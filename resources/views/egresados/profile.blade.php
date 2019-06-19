@@ -76,8 +76,20 @@
                 </h5>
                 @endif
             </div>
-            <div class="col-6 d-flex flex-column justify-content-center">
-                <h4 class="text-center orange-color">AMIGOS</h4>
+            <div class="col-6 text-center">
+                <h4 class="mx-auto text-center orange-color">AMIGOS</h4>
+                <div class="text-center">
+                    <div class="row">
+                        @foreach($user->egresado->amigos()->limit(6)->get() as $amigo)
+                        <div class="col-lg-4 col-md-6 col-sm-6 ">
+                            <a class="" href="{{ route('egresado.profile', $amigo->user->id) }}">
+                                <img class="h-75 w-100 img-thumbnail amigo-picture" src="/{{ $amigo->imagen }}" alt="profile-picture">   
+                            </a>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+                <a href="{{ route('egresado.amigos') }}" class="p-2 bg-orange text-white rounded-pill gray-hover mx-auto">Ver mas</a>
             </div>
         </div>
         
