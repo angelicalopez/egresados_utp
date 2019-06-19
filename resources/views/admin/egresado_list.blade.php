@@ -31,7 +31,7 @@
                 <h6>{{ $egresado->user->name }} {{ $egresado->apellidos }}<br /><small>Egresado</small></h6>
                 </div>
                 <div class="col-md-1 py-2">
-                <a class="deco-none" href="{{ route('admin.egresado.edit', $egresado->id) }}"><i class="fas fa-user-edit fa-lg"></i></a>
+                    <a class="deco-none" href="{{ route('admin.egresado.edit', $egresado->id) }}"><i class="fas fa-user-edit fa-lg"></i></a>
                 </div>
                 <div class="col-md-1">
                     <div class="unfollow">

@@ -41,6 +41,7 @@ route::group(['middleware' => 'auth'], function() {
     Route::put('/admin/noticia/update/{id}', 'NoticiaController@update')->name('admin.noticia.update');
     Route::put('/admin/noticia/updatemultimedia/{id}', 'NoticiaController@updatemultimedia')->name('admin.noticia.updatemultimedia');
     Route::delete('/admin/noticia/delete/{id}', 'NoticiaController@destroy')->name('admin.noticia.delete');
+    Route::delete('/admin/delete', 'AdminController@destroy')->name('admin.delete');
 });
 
 route::group(['middleware' => 'auth'], function() {
